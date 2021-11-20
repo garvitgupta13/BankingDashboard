@@ -1,9 +1,13 @@
+import React from "react";
+import Chart from "./components/showChart/Chart.js";
+import MainPage from "./components/loansAndInvestment/MainPage.js";
 import { TranactionHistroy } from "./components/transactionHistroy/TransactionHistroy";
-import "./App.css";
 
 function App() {
     return (
-        <div className="App">
+        <div>
+            <Chart />
+            <MainPage />
             <TranactionHistroy />
         </div>
     );
