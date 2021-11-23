@@ -14,7 +14,7 @@ export const DUMMY_TRANSACTION = [
         date: new Date("2018-01-01"),
         category: "shopping",
         payed: true,
-        type: "debit",
+        type: "credit",
         stmt: "baught a new bike"
     },
     {
@@ -22,8 +22,8 @@ export const DUMMY_TRANSACTION = [
         amount: 60000,
         date: new Date("2017-01-01"),
         category: "shopping",
-        payed: false,
-        type: "credit",
+        payed: true,
+        type: "debit",
         stmt: "sold old bike"
     },
     {
@@ -32,14 +32,14 @@ export const DUMMY_TRANSACTION = [
         date: new Date("2017-05-01"),
         category: "Utility Bill",
         payed: true,
-        type: "debit",
+        type: "credit",
         stmt: "payed electricity Utility Bill"
     },
     {
         id: "105",
         amount: 65000,
         date: new Date("2017-05-28"),
-        category: "Income",
+        category: "Fee",
         payed: true,
         type: "credit",
         stmt: "payed college fee"
@@ -48,9 +48,9 @@ export const DUMMY_TRANSACTION = [
         id: "106",
         amount: 5000,
         date: new Date("2016-04-28"),
-        category: "Income",
+        category: "Fee",
         payed: true,
-        type: "debit",
+        type: "credit",
         stmt: "payed tution fee for Compuuter Science"
     },
     {
@@ -68,8 +68,8 @@ export const DUMMY_TRANSACTION = [
         date: new Date("2015-04-28"),
         category: "Recharge",
         payed: true,
-        type: "debit",
-        stmt: "payed electricity Utility Bill"
+        type: "credit",
+        stmt: "recharged the phone"
     },
     {
         id: "109",
@@ -78,7 +78,7 @@ export const DUMMY_TRANSACTION = [
         category: "Travel",
         payed: true,
         type: "credit",
-        stmt: "payed electricity Utility Bill"
+        stmt: "went to Goa"
     },
     {
         id: "110",
@@ -86,8 +86,8 @@ export const DUMMY_TRANSACTION = [
         date: new Date("2015-01-01"),
         category: "Travel",
         payed: true,
-        type: "debit",
-        stmt: "payed electricity Utility Bill"
+        type: "credit",
+        stmt: "Went to Maldives"
     },
     {
         id: "111",
@@ -96,7 +96,7 @@ export const DUMMY_TRANSACTION = [
         category: "Food",
         payed: true,
         type: "credit",
-        stmt: "payed electricity Utility Bill"
+        stmt: "Went to KFC"
     },
     {
         id: "112",
@@ -104,7 +104,16 @@ export const DUMMY_TRANSACTION = [
         date: new Date("2013-01-01"),
         category: "Food",
         payed: true,
+        type: "credit",
+        stmt: "went to Burger King",
+    },
+    {
+        id: "113",
+        amount: 5000,
+        date: new Date("2013-01-01"),
+        category: "Food",
+        payed: true,
         type: "debit",
-        stmt: "payed electricity Utility Bill"
+        stmt: "received internship stipend"
     }
 ];
