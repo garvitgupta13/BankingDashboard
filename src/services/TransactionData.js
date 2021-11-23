@@ -2,65 +2,109 @@ export const DUMMY_TRANSACTION = [
     {
         id: "101",
         amount: 1500,
-        data: "21-09-2021",
+        date: new Date("2019-01-01"),
         category: "shopping",
         payed: true,
+        type: "credit",
         stmt: "went to walmart"
     },
     {
         id: "102",
         amount: 150000,
-        data: "25-09-2021",
+        date: new Date("2018-01-01"),
         category: "shopping",
         payed: true,
+        type: "debit",
         stmt: "baught a new bike"
     },
     {
         id: "103",
         amount: 60000,
-        data: "25-09-2021",
+        date: new Date("2017-01-01"),
         category: "shopping",
         payed: false,
+        type: "credit",
         stmt: "sold old bike"
     },
     {
         id: "104",
         amount: 800,
-        data: "21-09-2021",
-        category: "bill",
+        date: new Date("2017-05-01"),
+        category: "Utility Bill",
         payed: true,
-        stmt: "payed electricity bill"
+        type: "debit",
+        stmt: "payed electricity Utility Bill"
     },
     {
         id: "105",
         amount: 65000,
-        data: "21-09-2021",
-        category: "fee",
+        date: new Date("2017-05-28"),
+        category: "Income",
         payed: true,
+        type: "credit",
         stmt: "payed college fee"
     },
     {
         id: "106",
         amount: 5000,
-        data: "21-09-2021",
-        category: "fee",
+        date: new Date("2016-04-28"),
+        category: "Income",
         payed: true,
+        type: "debit",
         stmt: "payed tution fee for Compuuter Science"
     },
     {
-        id: "106",
+        id: "107",
         amount: 500,
-        data: "21-09-2021",
-        category: "rent",
+        date: new Date("2016-04-28"),
+        category: "Recharge",
         payed: false,
+        type: "credit",
         stmt: "received monthly rent"
     },
     {
-        id: "104",
-        amount: 800,
-        data: "21-19-2021",
-        category: "payed water bill",
+        id: "108",
+        amount: 900,
+        date: new Date("2015-04-28"),
+        category: "Recharge",
         payed: true,
-        stmt: "payed electricity bill"
+        type: "debit",
+        stmt: "payed electricity Utility Bill"
+    },
+    {
+        id: "109",
+        amount: 1000,
+        date: new Date("2015-01-28"),
+        category: "Travel",
+        payed: true,
+        type: "credit",
+        stmt: "payed electricity Utility Bill"
+    },
+    {
+        id: "110",
+        amount: 1100,
+        date: new Date("2015-01-01"),
+        category: "Travel",
+        payed: true,
+        type: "debit",
+        stmt: "payed electricity Utility Bill"
+    },
+    {
+        id: "111",
+        amount: 1200,
+        date: new Date("2014-01-01"),
+        category: "Food",
+        payed: true,
+        type: "credit",
+        stmt: "payed electricity Utility Bill"
+    },
+    {
+        id: "112",
+        amount: 1300,
+        date: new Date("2013-01-01"),
+        category: "Food",
+        payed: true,
+        type: "debit",
+        stmt: "payed electricity Utility Bill"
     }
 ];
