@@ -9,7 +9,6 @@ const LineChart = (props) => {
 
     const footer = (tooltipItems) =>{
 
-        console.log(tooltipItems);
         let footer_str = "";
         
         if(tooltipItems[0].dataset.label === 'Income')

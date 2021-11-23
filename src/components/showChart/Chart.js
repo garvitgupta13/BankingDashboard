@@ -165,7 +165,7 @@ const Chart = () => {
     // console.log(expenses_dpoints);
  
     return (
-         <div className='main-div'>
+         <div>
               <FilterYear year={year} onSaveYear = {changeYearHandler}/>
               <LineChart 
               expenses = {expenses} 
