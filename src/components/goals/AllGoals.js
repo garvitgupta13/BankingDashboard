@@ -1,4 +1,3 @@
-import { set } from "date-fns";
 import React,{useState} from "react";
 import { Grid } from "@material-ui/core";
 import Goal from "./Goal";
@@ -32,7 +31,6 @@ const DUMMY_GOALS = [
 
 const AllGoals = () => {
 
-    const len = DUMMY_GOALS.length;
 
 
     return(
