@@ -1,5 +1,4 @@
-import { set } from "date-fns";
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
@@ -88,20 +87,6 @@ const AllGoals = () => {
           />
         </div>
       );
-}
 
 export default AllGoals;
 
-/* <Grid container className="allGoals-grid">
-{DUMMY_GOALS.map((obj, index) => (
-     <Grid item >
-             <Goal
-                key = {obj.id}
-                title = {obj.title}
-                total = {obj.total}
-                collected = {obj.collected}
-                />
-      </Grid>
-
-))}
-</Grid> */
