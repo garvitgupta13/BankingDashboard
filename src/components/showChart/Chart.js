@@ -1,99 +1,34 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import FilterYear from './FilterYear';
-import { Card } from '@material-ui/core';
-import { useState  } from 'react';
 import LineChart from './LineChart';
-
-const DUMMY_TRANSACTION = [
-    {
-        id: '101',
-        amount: 1500,
-        date: '21-10-2021',
-        category: 'shopping',
-        payed: true,
-        stmt: 'went to walmart',
-    },
-    {
-        id: '102',
-        amount: 75000,
-        date: '25-09-2021',
-        category: 'shopping',
-        payed: true,
-        stmt: 'baught a new bike',
-
-    },
-    {
-        id: '103',
-        amount: 20000,
-        date: '25-09-2021',
-        category: 'shopping',
-        payed: false,
-        stmt: 'sold old bike',
-    },
-    {
-        id: '104',
-        amount: 800,
-        date: '21-11-2021',
-        category: 'bill',
-        payed: true,
-        stmt: 'payed electricity bill',
-    },
-    {
-        id: '105',
-        amount: 65000,
-        date: '21-01-2021',
-        category: 'fee',
-        payed: true,
-        stmt: 'payed college fee',
-    },
-    {
-        id: '106',
-        amount: 5000,
-        date: '21-05-2021',
-        category: 'fee',
-        payed: true,
-        stmt: 'payed tution fee for Compuuter Science',
-    },
-    {
-        id: '107',
-        amount: 500,
-        date: '21-06-2021',
-        category: 'rent',
-        payed: false,
-        stmt: 'received monthly rent',
-    },
-    {
-        id: '108',
-        amount: 800,
-        date: '21-08-2021',
-        category: 'bill',
-        payed: true,
-        stmt: 'payed electricity bill',
-    },
-    {
-        id: '109',
-        amount: 1000,
-        date: '21-08-2020',
-        category: 'bill',
-        payed: true,
-        stmt: 'payed electricity bill',
-    },
-    {
-        id: '110',
-        amount: 800,
-        date: '21-01-2019',
-        category: 'bill',
-        payed: true,
-        stmt: 'payed electricity bill',
-    },
-]
-
+import {transaction} from '../../services/getTransactions';
 
 
 const Chart = () => {
 
     const [year,setYear] = useState("2021");
+    const [allTransactions,setAllTransactions] = useState([]);
     
+    const getAllTransaction = () =>{
+        transaction().then((data) => {
+          if(data === undefined){
+            console.log("undefined data");
+          }
+          else if(data.data.error){
+            console.log("error on getting goals");
+          }
+          else{
+            const item = data.data;
+            const savedItems = Object.keys(item).map((key) => item[key]);    
+            setAllTransactions(savedItems);
+          }
+        })
+     }
+ 
+     useEffect(() => {
+          getAllTransaction();
+     },[])
+
     var expenses = [];
     var income = [];
     
@@ -116,53 +51,42 @@ const Chart = () => {
           }
     }
 
-
-    for(var i = 0 ; i < DUMMY_TRANSACTION.length ;i++)
+    if(allTransactions.length > 0)
     {
-        if(DUMMY_TRANSACTION[i].date.split('-')[2] === year)
+        console.log(allTransactions.length);
+        for(var i = 0 ; i < allTransactions.length ;i++)
         {
-            if(DUMMY_TRANSACTION[i].payed)
+            if(allTransactions[i].date.split('-')[0] === year && allTransactions[i].payed)
             {
-                if(DUMMY_TRANSACTION[i].date.split('-')[1][0] === '0')
+                if(allTransactions[i].type === "credit")
                 {
-                 expenses[parseInt(DUMMY_TRANSACTION[i].date.split('-')[1][1])].push(DUMMY_TRANSACTION[i]);
-                 expenses_dpoints[parseInt(DUMMY_TRANSACTION[i].date.split('-')[1][1])-1]+=DUMMY_TRANSACTION[i].amount;
+                    if(allTransactions[i].date.split('-')[1][0] === '0')
+                    {
+                    expenses[parseInt(allTransactions[i].date.split('-')[1][1])].push(allTransactions[i]);
+                    expenses_dpoints[parseInt(allTransactions[i].date.split('-')[1][1])-1]+=allTransactions[i].amount;
+                    }
+                    else 
+                    {
+                    expenses[parseInt(allTransactions[i].date.split('-')[1])].push(allTransactions[i]);
+                    expenses_dpoints[parseInt(allTransactions[i].date.split('-')[1])-1]+=allTransactions[i].amount;
+                    }
                 }
                 else 
                 {
-                  expenses[parseInt(DUMMY_TRANSACTION[i].date.split('-')[1])].push(DUMMY_TRANSACTION[i]);
-                  expenses_dpoints[parseInt(DUMMY_TRANSACTION[i].date.split('-')[1])-1]+=DUMMY_TRANSACTION[i].amount;
-                }
-            }
-            else 
-            {
-                if(DUMMY_TRANSACTION[i].date.split('-')[1][0] === '0')
-                {
-                  income[parseInt(DUMMY_TRANSACTION[i].date.split('-')[1][1])].push(DUMMY_TRANSACTION[i]);
-                  income_dpoints[parseInt(DUMMY_TRANSACTION[i].date.split('-')[1][1])-1]+=DUMMY_TRANSACTION[i].amount;
-                }
-                else 
-                {
-                  income[parseInt(DUMMY_TRANSACTION[i].date.split('-')[1])].push(DUMMY_TRANSACTION[i]);
-                  income_dpoints[parseInt(DUMMY_TRANSACTION[i].date.split('-')[1])-1]+=DUMMY_TRANSACTION[i].amount;   
+                    if(allTransactions[i].date.split('-')[1][0] === '0')
+                    {
+                    income[parseInt(allTransactions[i].date.split('-')[1][1])].push(allTransactions[i]);
+                    income_dpoints[parseInt(allTransactions[i].date.split('-')[1][1])-1]+=allTransactions[i].amount;
+                    }
+                    else 
+                    {
+                    income[parseInt(allTransactions[i].date.split('-')[1])].push(allTransactions[i]);
+                    income_dpoints[parseInt(allTransactions[i].date.split('-')[1])-1]+=allTransactions[i].amount;   
+                    }
                 }
             }
         }
     }
-
-    // for(var i = 0 ;  i < 12; i++)
-    // {
-    //     if(expenses_dpoints[i] === 0)
-    //         expenses_dpoints[i] = null;
-        
-    //     if(income_dpoints[i] === 0)
-    //         income_dpoints[i] = null;
-    // }
-
- 
-
-    // console.log(income_dpoints);
-    // console.log(expenses_dpoints);
  
     return (
          <div>

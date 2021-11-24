@@ -19,7 +19,7 @@ function App() {
       <Chart/>
       <MainPage/>
       <AllGoals/>
-      <TranactionHistroy />
+      <TranactionHistroy/>
     </div>
    </>
   );
