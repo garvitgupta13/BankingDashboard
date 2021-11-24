@@ -2,6 +2,7 @@ import React from "react";
 import Chart from "./components/showChart/Chart.js";
 import MainPage from "./components/loansAndInvestment/MainPage.js";
 import { TranactionHistroy } from "./components/transactionHistroy/TransactionHistroy";
+import BillReminders from "./components/billReminder/BillReminders";
 
 function App() {
     return (
@@ -9,6 +10,7 @@ function App() {
             <Chart />
             <MainPage />
             <TranactionHistroy />
+            <BillReminders />
         </div>
     );
 }
