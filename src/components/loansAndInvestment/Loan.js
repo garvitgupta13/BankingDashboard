@@ -4,7 +4,7 @@ const Loan = (props) =>{
 
     const DUMMY_LOANS =  props.data;
     return (
-        <>
+        <div className="loan">
           <table>
                 <thead>
                     <th>Type</th>
@@ -29,7 +29,7 @@ const Loan = (props) =>{
                     ))}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 
 }

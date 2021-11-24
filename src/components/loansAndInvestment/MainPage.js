@@ -47,7 +47,7 @@ const DUMMY_INVESTMENT = [
 const InvestmentLoan = () => {
     
     return (
-        <div className = "main-div">
+        <div className>
             <Investment data = {DUMMY_INVESTMENT}/>
             <Loan data = {DUMMY_LOANS}/>
         </div>

@@ -17,7 +17,7 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Button from "@mui/material/Button";
 import { DUMMY_TRANSACTION as transactionRecords } from "../../services/TransactionData";
 
-import styles from "./TransactionHistroy.module.scss";
+//import styles from "./TransactionHistroy.module.scss";
 
 const columns = [
     {

@@ -5,7 +5,7 @@ const Investment = (props) =>{
     const DUMMY_INVESTMENT = props.data;
 
     return (
-        <>
+        <div className="investment">
           <table>
                 <thead>
                     <th>Account Number</th>
@@ -26,7 +26,7 @@ const Investment = (props) =>{
                     ))}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 
 }
