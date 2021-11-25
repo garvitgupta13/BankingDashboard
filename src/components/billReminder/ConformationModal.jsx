@@ -34,7 +34,7 @@ export default function ConfirmationModal({
             <DialogTitle>{`Pay ${billReminder.name}`}</DialogTitle>
             <DialogContent>
                 {billReminder.type === "Recharge" ||
-                billReminder.type === "Electricity" ? (
+                    billReminder.type === "Utility Bill" ? (
                     <TextField
                         autoFocus
                         margin="dense"
@@ -50,10 +50,9 @@ export default function ConfirmationModal({
                     />
                 ) : (
                     <DialogContentText>
-                        {`Proceed to pay ${billReminder.amount} to ${
-                            billReminder.serviceProvider ??
+                        {`Proceed to pay ${billReminder.amount} to ${billReminder.serviceProvider ??
                             billReminder.senderAccNo
-                        }`}
+                            }`}
                     </DialogContentText>
                 )}
             </DialogContent>
@@ -94,7 +93,7 @@ export default function ConfirmationModal({
             ]}
         >
             {billReminder.type === "Recharge" ||
-            billReminder.type === "Electricity" ? (
+            billReminder.type === "Utility Bill" ? (
                 <div>
                     <Input
                         name="amount"

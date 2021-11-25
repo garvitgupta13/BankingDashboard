@@ -15,6 +15,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import styles from "./BillReminders.module.scss";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { addBillReminder } from './../../services/BillReminder';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -48,7 +49,7 @@ export default function AddReminderModal({
             counter: 0,
             paid: false,
         };
-        if (type === "Recharge" || type === "Electricity") {
+        if (type === "Recharge" || type === "Utility Bill") {
             if (!serviceProvider) { setToast(true); setToastMessage("Please fill all the fields"); setToastType("error"); return; }
             newReminder = { ...newReminder, serviceProvider }
         }
@@ -57,6 +58,7 @@ export default function AddReminderModal({
             newReminder = { ...newReminder, senderAccNo, amount }
         }
         //TODO: Push it into the database
+        addBillReminder(newReminder).then((res) => { newReminder = { id: res.data.name, ...newReminder } }).catch((err) => { console.log(err) });
         handleAddBillReminder(newReminder);
         setToast(true); setToastMessage("Bill reminder added successfully"); setToastType("success");
         handleVisiblity(false);
@@ -87,8 +89,8 @@ export default function AddReminderModal({
                         }}
                     >
                         <MenuItem value={"Recharge"}>Recharge</MenuItem>
-                        <MenuItem value={"Electricity"}>
-                            Electricity
+                        <MenuItem value={"Utility Bill"}>
+                            Utility Bill
                         </MenuItem>
                         <MenuItem value={"EMI"}>EMI</MenuItem>
                         <MenuItem value={"Others"}>Others</MenuItem>
@@ -158,7 +160,7 @@ export default function AddReminderModal({
                         />
                     </LocalizationProvider>
                 </div>
-                {type === "Recharge" || type === "Electricity" ?
+                {type === "Recharge" || type === "Utility Bill" ?
                     <div className={styles.formDiv}>
                         <InputLabel id="demo-simple-select-helper-label">
                             Service Provider

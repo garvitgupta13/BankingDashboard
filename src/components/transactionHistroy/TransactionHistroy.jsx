@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Button from "@mui/material/Button";
 import { DUMMY_TRANSACTION as transactionRecords } from "../../services/TransactionData";
-
+import { getTransaction } from "../../services/Transaction";
 //import styles from "./TransactionHistroy.module.scss";
 
 const columns = [
@@ -32,12 +32,6 @@ const columns = [
         format: (value) => moment(value).format("MM/DD/YYYY")
     },
     { id: "category", label: "Category", minWidth: 50 },
-    {
-        id: "payed",
-        label: "Status",
-        minWidth: 50,
-        format: (value) => (value ? "Success" : "Failed")
-    },
     { id: "stmt", label: "Remark", minWidth: 100 }
 ];
 
@@ -48,7 +42,10 @@ const categoryOptions = [
     { value: "Shopping", label: "Shopping" },
     { value: "Utility Bill", label: "Utility Bill" },
     { value: "Recharge", label: "Recharge" },
-    { value: "Income", label: "Income" }
+    { value: "Income", label: "Income" },
+    { value: "Fee", label: "Fee" },
+    { value: "EMI", label: "EMI" },
+    { value: "Others", label: "Others" }
 ];
 //width:615, height:330
 export function TranactionHistroy({ width = null, height = null }) {
@@ -56,13 +53,30 @@ export function TranactionHistroy({ width = null, height = null }) {
     const [rowsPerPage, setRowsPerPage] = useState(20);
     const [sortCol, setSortCol] = useState("date");
     const [sortDir, setSortDir] = useState("desc");
-    const [transactions, setTransactions] = useState(transactionRecords);
+    const [transactions, setTransactions] = useState([]);
     const [amountLessThanFilter, setAmountLessThanFilter] = useState(undefined);
     const [amountMoreThanFilter, setAmountMoreThanFilter] = useState(undefined);
-    const [statusFilter, setStatusFilter] = useState(undefined);
     const [startDateFilter, setStartDateFilter] = useState(undefined);
     const [endDateFilter, setEndDateFilter] = useState(undefined);
     const [categoryFilter, setCategoryFilter] = useState(undefined);
+
+    useEffect(() => {
+        fetchTransactions();
+    }, []);
+
+    const fetchTransactions = () => {
+        getTransaction().then(({ status, data }) => {
+            if (status === 200) {
+                setTransactions(Object.keys(data).map((key) => { return { id: key, ...data[key] } }));
+            }
+            else {
+                return [];
+            }
+        });
+    }
+
+
+
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -102,14 +116,7 @@ export function TranactionHistroy({ width = null, height = null }) {
                 }
             );
         }
-        if (statusFilter) {
-            filteredTransactions = _.filter(
-                filteredTransactions,
-                (transaction) => {
-                    if (transaction.payed === statusFilter) return transaction;
-                }
-            );
-        }
+
         if (categoryFilter) {
             filteredTransactions = _.filter(
                 filteredTransactions,
@@ -146,7 +153,6 @@ export function TranactionHistroy({ width = null, height = null }) {
     const handleReset = () => {
         setAmountLessThanFilter(undefined);
         setAmountMoreThanFilter(undefined);
-        setStatusFilter(undefined);
         setCategoryFilter(undefined);
         setStartDateFilter(undefined);
         setEndDateFilter(undefined);
@@ -202,20 +208,6 @@ export function TranactionHistroy({ width = null, height = null }) {
                     onChange={(e) => setEndDateFilter(e.target.value)}
                 />
 
-                <TextField
-                    id="filled-select"
-                    select
-                    label="Status"
-                    value={categoryFilter}
-                    onChange={(e) => {
-                        setStatusFilter(e.target.value);
-                    }}
-                    variant="filled"
-                    style={{ width: "200px" }}
-                >
-                    <MenuItem value={true}>Successful</MenuItem>
-                    <MenuItem value={false}>Failed</MenuItem>
-                </TextField>
                 <TextField
                     id="filled-select"
                     select
@@ -296,7 +288,7 @@ export function TranactionHistroy({ width = null, height = null }) {
                                                 if (column.id === "amount") {
                                                     const transactionType =
                                                         transaction["type"] ===
-                                                        "credit"
+                                                            "debit"
                                                             ? true
                                                             : false;
                                                     return (
@@ -308,11 +300,10 @@ export function TranactionHistroy({ width = null, height = null }) {
                                                                     : "red"
                                                             }}
                                                         >
-                                                            {`${
-                                                                transactionType
-                                                                    ? "+ ₹"
-                                                                    : "- ₹"
-                                                            } ${value}`}
+                                                            {`${transactionType
+                                                                ? "+ ₹"
+                                                                : "- ₹"
+                                                                } ${value}`}
                                                         </TableCell>
                                                     );
                                                 } else {
@@ -322,8 +313,8 @@ export function TranactionHistroy({ width = null, height = null }) {
                                                         >
                                                             {column.format
                                                                 ? column.format(
-                                                                      value
-                                                                  )
+                                                                    value
+                                                                )
                                                                 : value}
                                                         </TableCell>
                                                     );

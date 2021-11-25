@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { BillsData as data } from "../../services/billsData";
 import moment from "moment";
 import Button from "@mui/material/Button";
 import ConfirmationModal from "./ConformationModal";
 import AddReminderModal from "./AddReminder";
 import styles from "./BillReminders.module.scss";
-
+import { getBillReminders, updateBillReminder } from './../../services/BillReminder';
 //create a bill reminder component
 export default function BillReminders() {
-    const [billReminders, setBillReminders] = useState(data);
+    const [billReminders, setBillReminders] = useState([]);
     const [confirmationModalVisibility, setConfirmationModalVisibility] =
         useState(false);
     const [addReminderModalVisibility, setAddReminderModalVisibility] =
         useState(false);
     const [selectedBillReminder, setSelectedBillReminder] = useState(undefined);
+
+    useEffect(() => {
+        fetchBillReminder();
+    }, []);
+
+    const fetchBillReminder = () => {
+        getBillReminders().then(({ status, data }) => {
+            if (status === 200) {
+                setBillReminders(Object.keys(data).map((key) => { return { id: key, ...data[key] } }));
+            }
+            else {
+                return [];
+            }
+        });
+    }
+
 
     const handleUpdateBillReminder = (billReminder) => {
         const updatedBillReminders = billReminders.map((item) => {
@@ -24,11 +39,11 @@ export default function BillReminders() {
                 if (daysLeft <= 0) {
                     billReminder.paid = false;
                 }
+                updateBillReminder(billReminder).then((res) => { console.log(res, billReminder) });
                 return billReminder;
             }
             return item;
         });
-        //TODO: Update the reminder in db
         setBillReminders(updatedBillReminders);
     };
 
@@ -36,14 +51,13 @@ export default function BillReminders() {
         <div>
             <h1>Bill Reminders</h1>
             <div className="bill-reminders">
-                {billReminders.map((billReminder) => {
-                    console.log(billReminder);
+                {billReminders.map((billReminder, index) => {
                     const dueDate = moment(billReminder.startDate, "DD-MM-YYYY").add(billReminder.counter + 1, billReminder.frequency);
                     const daysLeft = dueDate.diff(moment(), "days");
                     return (
                         <div
                             className={`${styles.billReminder} ${billReminder.paid ? styles.success : (daysLeft <= 3 ? styles.alert : null)}`}
-                            key={billReminder.id}
+                            key={index}
                             onClick={() => {
                                 setSelectedBillReminder(billReminder);
                                 setConfirmationModalVisibility(true);
