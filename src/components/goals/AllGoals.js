@@ -2,12 +2,11 @@ import React,{useState, useEffect} from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Goal from "./Goal";
+import AddGoal from "./AddGoals";
 import {goals} from '../../services/getGoals';
 import {useStyles} from './AllGoalsStyles';
 
@@ -17,7 +16,18 @@ export default function AllGoals (){
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const [allGoals,setAllGoals] = useState([]);
+    const [count,setCount] = useState(0);
     const maxSteps =  allGoals.length
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+      setOpen(true);
+    };
+
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     const getAllGoals = () =>{
        goals().then((data) => {
@@ -29,7 +39,8 @@ export default function AllGoals (){
          }
          else{
            const item = data.data;
-           const savedItems = Object.keys(item).map((key) => item[key]);         
+           const savedItems = Object.keys(item).map((key) => [key,item[key]] );   
+           console.log(savedItems);
            setAllGoals(savedItems);
          }
        })
@@ -59,12 +70,17 @@ export default function AllGoals (){
     return (
        
         <div className={classes.root}>
+            <div className={classes.button} type="button" onClick={handleOpen}>
+              <AddGoal onAddGoal = {(newGoal) => setAllGoals([...allGoals, newGoal]) }/>
+            </div>
           <Grid item >
              <Goal
-                key = {allGoals[activeStep].id}
-                title = {allGoals[activeStep].title}
-                total = {allGoals[activeStep].total}
-                collected = {allGoals[activeStep].collected}
+                key = {allGoals[activeStep][1].id}
+                id  = {allGoals[activeStep][0]}
+                id_tmp = {allGoals[activeStep][1].id}
+                title = {allGoals[activeStep][1].title}
+                total = {parseInt(allGoals[activeStep][1].total)}
+                collected = {parseInt(allGoals[activeStep][1].collected)}
                 />
            </Grid>
           <MobileStepper
@@ -87,4 +103,4 @@ export default function AllGoals (){
           />
         </div>
       );
-          }
+}

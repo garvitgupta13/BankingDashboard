@@ -30,8 +30,6 @@ const Goal = (props) => {
 
 
 
-    console.log(total,value);
-
     return(
       <Box className="goal-box-main" position="relative">
           <div className="goal-div">
@@ -53,6 +51,9 @@ const Goal = (props) => {
             )}%`}</Typography>
             <div className = "show-figures">
                  <AlterGoal 
+                 title = {props.title}
+                 id = {props.id}
+                 id_tmp = {props.id_tmp}
                  total = {total}
                  onChangeTotal = {totalChangeHandler}
                  onChangeGoal = {goalChangeHandler} 
