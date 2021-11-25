@@ -1,13 +1,16 @@
 import React,{useState} from "react";
 import { Button } from "@material-ui/core";
+import axios from "axios";
+import { changeGoal } from "../../services/getGoals";
 import './AlterGoals.css';
 
 const AlterGoal = (props) => {
 
-    const submitHandler = (event) => {
+    const submitHandler = async(event) => {
       event.preventDefault();
-      console.log("Hello")
+      changeGoal(props.id,props.id_tmp,props.collected,props.title,props.total);
     }
+
 
     return (
         <div className="alter-div">
@@ -19,7 +22,7 @@ const AlterGoal = (props) => {
              <label for="collected">COLLECTED</label>
              <input type = "number" name = "collected" value={props.collected} onChange={(event) => props.onChangeGoal(event.target.value)}></input>
              
-             <Button className="goal-button" variant="contained" color = "primary" size="small">
+             <Button className="goal-button" variant="contained" color = "primary" size="small" onClick={submitHandler}>
                 SUBMIT 
              </Button>
           </form>

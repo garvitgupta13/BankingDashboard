@@ -10,3 +10,33 @@ export const goals = async() => {
         console.log(error);
     }
 }
+
+export const changeGoal = async(id,temp_id,collected,title,total) => {
+
+    try{
+          const response = await axios.put(`https://banking-dashboard-default-rtdb.firebaseio.com/goals/${id}.json`,{
+          collected:  collected,
+          id:         temp_id,
+          title:      title,
+          total:      total
+      }) 
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+export const addGoal = async(id,title,total,collected) => {
+
+    try{
+         const response = await axios.put(`${FIREBASE_URL}goals/${id}.json`, {
+             id: id,
+             title:title,
+             collected:collected,
+             total:total
+            })
+    }
+    catch(error){
+        console.log(error);
+    }
+}

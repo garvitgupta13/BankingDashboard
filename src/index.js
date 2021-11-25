@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import GoalProvider from './store/GoalProvider';
 
 ReactDOM.render(
     <React.StrictMode>
+      <GoalProvider>
         <App />
+      </GoalProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );
