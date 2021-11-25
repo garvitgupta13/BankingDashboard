@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
@@ -11,7 +11,7 @@ import Goal from "./Goal";
 import {goals} from '../../services/getGoals';
 import {useStyles} from './AllGoalsStyles';
 
-const AllGoals = () => {
+export default function AllGoals (){
 
     const classes = useStyles();
     const theme = useTheme();
@@ -87,6 +87,4 @@ const AllGoals = () => {
           />
         </div>
       );
-
-export default AllGoals;
-
+          }

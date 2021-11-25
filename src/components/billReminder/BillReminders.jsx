@@ -58,7 +58,7 @@ export default function BillReminders() {
                             </div>
                             <div className="bill-reminder-daysLeft"></div>
                             {daysLeft >= 0
-                                ? daysLeft < 31
+                                ? daysLeft <= 65
                                     ? `${daysLeft} days left`
                                     : `${dueDate.diff(
                                         moment(),
