@@ -15,7 +15,6 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Button from "@mui/material/Button";
-import { DUMMY_TRANSACTION as transactionRecords } from "../../services/TransactionData";
 import { getTransaction } from "../../services/Transaction";
 //import styles from "./TransactionHistroy.module.scss";
 
@@ -50,7 +49,6 @@ const categoryOptions = [
 //width:615, height:330
 export function TranactionHistroy({ width = null, height = null }) {
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(20);
     const [sortCol, setSortCol] = useState("date");
     const [sortDir, setSortDir] = useState("desc");
     const [transactions, setTransactions] = useState([]);
@@ -67,7 +65,8 @@ export function TranactionHistroy({ width = null, height = null }) {
     const fetchTransactions = () => {
         getTransaction().then(({ status, data }) => {
             if (status === 200) {
-                setTransactions(Object.keys(data).map((key) => { return { id: key, ...data[key] } }));
+                const allTransactions = Object.keys(data).map((key) => { return { id: key, ...data[key] } });
+                setTransactions(_.orderBy(allTransactions, ["date"], ["desc"]));
             }
             else {
                 return [];
@@ -82,11 +81,6 @@ export function TranactionHistroy({ width = null, height = null }) {
         setPage(newPage);
     };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
-
     const handleSort = (col) => {
         setSortCol(col);
         setSortDir(sortDir === "desc" ? "asc" : "desc");
@@ -97,7 +91,7 @@ export function TranactionHistroy({ width = null, height = null }) {
     }, [sortCol, sortDir]);
 
     const handleFilter = () => {
-        let filteredTransactions = transactionRecords;
+        let filteredTransactions = transactions;
         if (amountLessThanFilter) {
             filteredTransactions = _.filter(
                 filteredTransactions,
@@ -156,7 +150,7 @@ export function TranactionHistroy({ width = null, height = null }) {
         setCategoryFilter(undefined);
         setStartDateFilter(undefined);
         setEndDateFilter(undefined);
-        setTransactions(transactionRecords);
+        setTransactions(fetchTransactions());
     };
 
     return (
@@ -271,8 +265,8 @@ export function TranactionHistroy({ width = null, height = null }) {
                         <TableBody>
                             {transactions
                                 .slice(
-                                    page * rowsPerPage,
-                                    page * rowsPerPage + rowsPerPage
+                                    page * 5,
+                                    page * 5 + 5
                                 )
                                 .map((transaction) => {
                                     return (
@@ -327,15 +321,12 @@ export function TranactionHistroy({ width = null, height = null }) {
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    rowsPerPageOptions={[
-                        5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
-                    ]}
                     component="div"
-                    count={transactionRecords.length}
-                    rowsPerPage={rowsPerPage}
+                    rowsPerPageOptions={[5]}
+                    count={transactions.length}
+                    rowsPerPage={5}
                     page={page}
                     onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
         </>

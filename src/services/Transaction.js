@@ -16,7 +16,7 @@ export const addTransaction = async (transaction) => {
             `${FIREBASE_URL}/trasactions.json`,
             transaction
         );
-        return response.data;
+        return response;
     } catch (error) {
         console.log(error);
     }

@@ -58,7 +58,10 @@ export default function AddReminderModal({
             newReminder = { ...newReminder, senderAccNo, amount }
         }
         //TODO: Push it into the database
-        addBillReminder(newReminder).then((res) => { newReminder = { id: res.data.name, ...newReminder } }).catch((err) => { console.log(err) });
+        addBillReminder(newReminder).then((res) => {
+            newReminder = { id: res.data.name, ...newReminder }
+
+        }).catch((err) => { console.log(err) });
         handleAddBillReminder(newReminder);
         setToast(true); setToastMessage("Bill reminder added successfully"); setToastType("success");
         handleVisiblity(false);

@@ -49,7 +49,7 @@ export default function BillReminders() {
 
     return (
         <div>
-            <h1>Bill Reminders</h1>
+            <h2>Bill Reminders</h2>
             <div className="bill-reminders">
                 {billReminders.map((billReminder, index) => {
                     const dueDate = moment(billReminder.startDate, "DD-MM-YYYY").add(billReminder.counter + 1, billReminder.frequency);
@@ -64,7 +64,7 @@ export default function BillReminders() {
                             }}
                         >
                             <div className="bill-reminder-name">
-                                {billReminder.name}
+                                <h4> {billReminder.name}</h4>
                             </div>
                             <div className="bill-reminder-amount">
                                 {billReminder.amount ??
