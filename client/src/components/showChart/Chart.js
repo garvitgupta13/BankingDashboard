@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import FilterYear from './FilterYear';
 import LineChart from './LineChart';
-import {transaction} from '../../services/getTransactions';
+import { getTransaction } from "../../services/Transaction";
 import './Chart.css';
 
 const Chart = () => {
@@ -10,7 +10,7 @@ const Chart = () => {
     const [allTransactions,setAllTransactions] = useState([]);
     
     const getAllTransaction = () =>{
-        transaction().then((data) => {
+      getTransaction().then((data) => {
           if(data === undefined){
             console.log("undefined data");
           }
