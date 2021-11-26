@@ -150,7 +150,7 @@ export function TranactionHistroy({ width = null, height = null }) {
         setCategoryFilter(undefined);
         setStartDateFilter(undefined);
         setEndDateFilter(undefined);
-        setTransactions(fetchTransactions());
+        fetchTransactions();
     };
 
     return (
@@ -232,94 +232,95 @@ export function TranactionHistroy({ width = null, height = null }) {
                 </Button>
             </div>
             <Paper sx={{ width: width ? `${width}px` : "100%" }}>
-                <TableContainer
-                    sx={{ height: height ? `${height}px` : "100%" }}
-                >
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.id}
-                                        onClick={() => {
-                                            handleSort(column.id);
-                                        }}
-                                        style={{
-                                            minWidth: column.minWidth,
-                                            color: "white",
-                                            backgroundColor: "#3f51b5",
-                                            cursor: "pointer"
-                                        }}
-                                    >
-                                        {column.label}
-                                        {sortCol === column.id &&
-                                            (sortDir === "desc" ? (
-                                                <ArrowDropDownIcon />
-                                            ) : (
-                                                <ArrowDropUpIcon />
-                                            ))}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {transactions
-                                .slice(
-                                    page * 5,
-                                    page * 5 + 5
-                                )
-                                .map((transaction) => {
-                                    return (
-                                        <TableRow
-                                            hover
-                                            role="checkbox"
-                                            tabIndex={-1}
-                                            key={transaction.id}
+                {transactions.length > 0 ? (
+                    <TableContainer
+                        sx={{ height: height ? `${height}px` : "100%" }}
+                    >
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    {columns.map((column) => (
+                                        <TableCell
+                                            key={column.id}
+                                            onClick={() => {
+                                                handleSort(column.id);
+                                            }}
+                                            style={{
+                                                minWidth: column.minWidth,
+                                                color: "white",
+                                                backgroundColor: "#3f51b5",
+                                                cursor: "pointer"
+                                            }}
                                         >
-                                            {columns.map((column) => {
-                                                const value =
-                                                    transaction[column.id];
-                                                if (column.id === "amount") {
-                                                    const transactionType =
-                                                        transaction["type"] ===
-                                                            "debit"
-                                                            ? true
-                                                            : false;
-                                                    return (
-                                                        <TableCell
-                                                            key={column.id}
-                                                            style={{
-                                                                color: transactionType
-                                                                    ? "green"
-                                                                    : "red"
-                                                            }}
-                                                        >
-                                                            {`${transactionType
-                                                                ? "+ ₹"
-                                                                : "- ₹"
-                                                                } ${value}`}
-                                                        </TableCell>
-                                                    );
-                                                } else {
-                                                    return (
-                                                        <TableCell
-                                                            key={column.id}
-                                                        >
-                                                            {column.format
-                                                                ? column.format(
-                                                                    value
-                                                                )
-                                                                : value}
-                                                        </TableCell>
-                                                    );
-                                                }
-                                            })}
-                                        </TableRow>
-                                    );
-                                })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                                            {column.label}
+                                            {sortCol === column.id &&
+                                                (sortDir === "desc" ? (
+                                                    <ArrowDropDownIcon />
+                                                ) : (
+                                                    <ArrowDropUpIcon />
+                                                ))}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {transactions
+                                    .slice(
+                                        page * 5,
+                                        page * 5 + 5
+                                    )
+                                    .map((transaction) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                tabIndex={-1}
+                                                key={transaction.id}
+                                            >
+                                                {columns.map((column) => {
+                                                    const value =
+                                                        transaction[column.id];
+                                                    if (column.id === "amount") {
+                                                        const transactionType =
+                                                            transaction["type"] ===
+                                                                "debit"
+                                                                ? true
+                                                                : false;
+                                                        return (
+                                                            <TableCell
+                                                                key={column.id}
+                                                                style={{
+                                                                    color: transactionType
+                                                                        ? "green"
+                                                                        : "red"
+                                                                }}
+                                                            >
+                                                                {`${transactionType
+                                                                    ? "+ ₹"
+                                                                    : "- ₹"
+                                                                    } ${value}`}
+                                                            </TableCell>
+                                                        );
+                                                    } else {
+                                                        return (
+                                                            <TableCell
+                                                                key={column.id}
+                                                            >
+                                                                {column.format
+                                                                    ? column.format(
+                                                                        value
+                                                                    )
+                                                                    : value}
+                                                            </TableCell>
+                                                        );
+                                                    }
+                                                })}
+                                            </TableRow>
+                                        );
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>) : (<div>No Transactions</div>)}
                 <TablePagination
                     component="div"
                     rowsPerPageOptions={[5]}
