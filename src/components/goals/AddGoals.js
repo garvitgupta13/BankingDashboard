@@ -33,7 +33,7 @@ const AddGoal = (props) => {
     setOpen(false);
   };
 
-  const submitHandler = () => {
+  const submitHandler = async() => {
      
       if(!title || !amount || !collected)
       {
@@ -51,8 +51,9 @@ const AddGoal = (props) => {
       }
       
       const id = uuid();
-      addGoal(id,title,amount,collected);
-      props.onAddGoal([id,{
+      const response = await addGoal(id,title,amount,collected);
+
+      props.onAddGoal([response.data.name,{
         id: id,
         title:title,
         collected:collected,

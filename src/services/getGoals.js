@@ -29,12 +29,14 @@ export const changeGoal = async(id,temp_id,collected,title,total) => {
 export const addGoal = async(id,title,total,collected) => {
 
     try{
-         const response = await axios.put(`${FIREBASE_URL}goals/${id}.json`, {
+         const response = await axios.post(`${FIREBASE_URL}goals.json`, {
              id: id,
              title:title,
              collected:collected,
              total:total
             })
+          
+            return response;
     }
     catch(error){
         console.log(error);

@@ -21,6 +21,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     button: {
       marginTop:0,
-      ["@media (min-height:600px)"]: { marginTop: 50 }
+      ["@media (max-width:960px)"]: { marginTop: 50 }
     }
   }));

@@ -58,6 +58,11 @@ export default function AllGoals (){
        setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    const goalChangeHandler = (id,total,collected) => {
+        
+      console.log("change in goal of id ",id);
+    };
+
     if(allGoals.length === 0)
     {
       return (
@@ -81,6 +86,7 @@ export default function AllGoals (){
                 title = {allGoals[activeStep][1].title}
                 total = {parseInt(allGoals[activeStep][1].total)}
                 collected = {parseInt(allGoals[activeStep][1].collected)}
+                onChangeGoal = {goalChangeHandler}
                 />
            </Grid>
           <MobileStepper

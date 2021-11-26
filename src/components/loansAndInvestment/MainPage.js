@@ -29,7 +29,8 @@ const InvestmentLoan = () => {
    },[])
 
     return (
-        <div className>
+        <div className = "loans-div">
+            <h2>LOANS TAKEN</h2>
             <Loan data = {allLoans}/>
         </div>
     )
