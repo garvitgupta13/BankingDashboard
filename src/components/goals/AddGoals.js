@@ -10,6 +10,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { addGoal } from '../../services/getGoals';
 import uuid from 'react-uuid';
+import './AddGoals.css';
 
 const AddGoal = (props) => {
   const [open, setOpen] = useState(false);
@@ -67,7 +68,7 @@ const AddGoal = (props) => {
   return (
     <div>
 
-        <AddBoxIcon color="primary"  onClick={handleClickOpen}/>
+      <AddBoxIcon color="primary"   onClick={handleClickOpen}/>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">ADD GOAL</DialogTitle>
         <DialogContent>

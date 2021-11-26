@@ -1,7 +1,7 @@
 export const BillsData = [
     {
         id: 1,
-        type: "Electricity",
+        type: "Utility Bill",
         name: "Electricity Bill",
         serviceProvider: "Rajasthan Electricity Company",
         startDate: "24-10-2021",

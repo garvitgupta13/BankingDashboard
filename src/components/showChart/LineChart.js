@@ -47,6 +47,7 @@ const LineChart = (props) => {
                     ]
                 }}
                 options = {{
+                    maintainAspectRatio: false,
                     scales:{
                         yAxis:[{
                             ticks:{

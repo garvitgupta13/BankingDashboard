@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState, useEffect} from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
@@ -10,7 +10,7 @@ import AddGoal from "./AddGoals";
 import {goals} from '../../services/getGoals';
 import {useStyles} from './AllGoalsStyles';
 
-const AllGoals = () => {
+export default function AllGoals (){
 
     const classes = useStyles();
     const theme = useTheme();
@@ -70,7 +70,7 @@ const AllGoals = () => {
     return (
        
         <div className={classes.root}>
-            <div className={classes.button} type="button" onClick={handleOpen}>
+            <div className={classes.button} onClick={handleOpen}>
               <AddGoal onAddGoal = {(newGoal) => setAllGoals([...allGoals, newGoal]) }/>
             </div>
           <Grid item >
@@ -103,6 +103,4 @@ const AllGoals = () => {
           />
         </div>
       );
-  }
-export default AllGoals;
-
+}

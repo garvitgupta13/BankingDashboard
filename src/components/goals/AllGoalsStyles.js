@@ -20,6 +20,7 @@ export const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2, 4, 3),
     },
     button: {
-      marginTop: 12,
+      marginTop:0,
+      ["@media (min-height:600px)"]: { marginTop: 50 }
     }
   }));

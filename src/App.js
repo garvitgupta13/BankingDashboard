@@ -7,6 +7,7 @@ import { TranactionHistroy } from "./components/transactionHistroy/TransactionHi
 import BillReminders from "./components/billReminder/BillReminders";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import AccountInfo from "./components/accountInfo/AccountInfo.js";
 import {useStyles} from './AppStyles';
 import "./App.css";
 
@@ -20,20 +21,21 @@ function App() {
             <ResponsiveDrawer />
             <div className="main-div">
                 <Grid container>
-                    <Grid item lg = {9} md = {9} sm = {9} xs = {12}> 
+                    <Grid item lg = {9} md = {12} sm = {12} xs = {12}> 
                         <Grid container>
-                            <Grid item lg = {6} md = {6}  xs = {12}>
+                            <Grid item lg = {6} md = {6} sm={12}  xs = {12}>
                                 <Chart />
                             </Grid>
-                            <Grid item lg = {6} md = {6} xs = {12}>
+                            <Grid item lg = {6} md = {6} sm={12} xs = {12}>
                                 <AllGoals />
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item lg = {3} md = {3} sm = {9} xs = {12}>
-                        <div className = "main-div-2">
-                            HELLO MF WASSUP MISSING ME
-                        </div>
+                    <Grid item lg = {3} md = {12} sm = {12} xs = {12}>
+                        <AccountInfo/>
+                    </Grid>
+                    <Grid item lg = {12} md = {12} sm = {12} xs = {12}>
+                        <TranactionHistroy/>
                     </Grid>
                 </Grid>
                 <Grid container>

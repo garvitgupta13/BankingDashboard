@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import FilterYear from './FilterYear';
 import LineChart from './LineChart';
 import {transaction} from '../../services/getTransactions';
-
+import './Chart.css';
 
 const Chart = () => {
 
@@ -19,7 +19,8 @@ const Chart = () => {
           }
           else{
             const item = data.data;
-            const savedItems = Object.keys(item).map((key) => item[key]);    
+            const savedItems = Object.keys(item).map((key) => item[key]);  
+            console.log(savedItems);  
             setAllTransactions(savedItems);
           }
         })
@@ -56,19 +57,19 @@ const Chart = () => {
         console.log(allTransactions.length);
         for(var i = 0 ; i < allTransactions.length ;i++)
         {
-            if(allTransactions[i].date.split('-')[0] === year && allTransactions[i].payed)
+            if(allTransactions[i].date.split('-')[0] === year)
             {
                 if(allTransactions[i].type === "credit")
                 {
                     if(allTransactions[i].date.split('-')[1][0] === '0')
                     {
                     expenses[parseInt(allTransactions[i].date.split('-')[1][1])].push(allTransactions[i]);
-                    expenses_dpoints[parseInt(allTransactions[i].date.split('-')[1][1])-1]+=allTransactions[i].amount;
+                    expenses_dpoints[parseInt(allTransactions[i].date.split('-')[1][1])-1]+=parseInt(allTransactions[i].amount);
                     }
                     else 
                     {
                     expenses[parseInt(allTransactions[i].date.split('-')[1])].push(allTransactions[i]);
-                    expenses_dpoints[parseInt(allTransactions[i].date.split('-')[1])-1]+=allTransactions[i].amount;
+                    expenses_dpoints[parseInt(allTransactions[i].date.split('-')[1])-1]+=parseInt(allTransactions[i].amount);
                     }
                 }
                 else 
@@ -89,7 +90,7 @@ const Chart = () => {
     }
  
     return (
-         <div>
+         <div className="chart">
               <FilterYear year={year} onSaveYear = {changeYearHandler}/>
               <LineChart 
               expenses = {expenses} 
