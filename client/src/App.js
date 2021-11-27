@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Chart from "./components/showChart/Chart.js";
 import MainPage from "./components/loansAndInvestment/MainPage.js";
 import ResponsiveDrawer from "./components/ResponsiveDrawer.js";
@@ -14,6 +14,21 @@ import "./App.css";
 const FIREBASE_URL = "https://banking-dashboard-default-rtdb.firebaseio.com/";
 
 function App() {
+
+
+    useEffect(() =>{
+        window.watsonAssistantChatOptions = {
+            integrationID: "e608934d-ee59-4b7f-9c8d-1f243989b1e2", // The ID of this integration.
+            region: "eu-gb", // The region your integration is hosted in.
+            serviceInstanceID: "ef1a1c87-2a70-4073-9c69-9358921615c3", // The ID of your service instance.
+            onLoad: function(instance) { instance.render(); }
+          };
+        setTimeout(function(){
+          const t=document.createElement('script');
+          t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js"
+          document.head.appendChild(t);
+        });
+    },[])
 
     const classes = useStyles();
     return (
