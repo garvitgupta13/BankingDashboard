@@ -1,15 +1,65 @@
 import React,{useState} from "react";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const LoanForm = () => {
 
-    const [amount,setAmount] = useState();
-    const [year,setYear] = useState();
-    const [type,setType] = useState();
-    
+    const [income,setIncome] = useState(0);
+    const [month,setMonth] = useState(0);
+    const [amount,setAmount] = useState(0);
+    const [toast, setToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
+    const [toastType, setToastType] = useState("");
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+     });
+
+     
     const predictHandler = () => {
-        console.log("Hurrah !!!")
+        
+      if(!income || !month || !amount)
+      {
+         setToast(true);
+         setToastMessage("Please fill all the fields"); 
+         setToastType("error"); 
+         return;
+      }
+
+      const url = "http://localhost:8000/scoreJson";
+      
+      const bodyData = JSON.stringify({
+        "Income":income,
+        "Amount":amount,
+        "Months":month,
+      });
+
+      const reqOpt = {method:"POST",headers:{"Content-type":"application/json"},body:bodyData};
+
+      fetch(url,reqOpt)
+      .then((response)=> response.json())
+      .then((respJ)=> {
+        if(respJ.output === 1)
+        {
+          setToast(true);
+          setToastMessage("Congrats!! You can get loan"); 
+          setToastType("success");     
+        }
+        else
+        {
+          setToast(true);
+          setToastMessage("Sorry!! It's difficult to get Loan"); 
+          setToastType("error"); 
+        }
+      });
+
+
+      setIncome(0);
+      setAmount(0);
+      setMonth(0);
+
     }
     return (
      <div style={{margin:'10px',}}>
@@ -17,13 +67,13 @@ const LoanForm = () => {
          <TextField
             autoFocus
             margin="dense"
-            label="Type"
-            type="text"
-            value = {type}
-            onChange = {((event) => setType(event.target.value))}
+            label="Income"
+            type="number"
+            value = {income}
+            onChange = {((event) => setIncome(event.target.value))}
             fullWidth
           />
-          <TextField
+            <TextField
             autoFocus
             margin="dense"
             label="Amount"
@@ -35,15 +85,20 @@ const LoanForm = () => {
           <TextField
             autoFocus
             margin="dense"
-            label="Years"
+            label="Months"
             type="number"
-            value = {year}
-            onChange = {((event) => setYear(event.target.value))}
+            value = {month}
+            onChange = {((event) => setMonth(event.target.value))}
             fullWidth
           />
           <Button onClick={predictHandler} color="primary" variant="contained">
              Predict
           </Button>
+          {toast && <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                open={toast}
+                onClose={() => setToast(false)}
+            ><Alert severity={toastType}>{toastMessage}</Alert></Snackbar>}
      </div>
     );
 }
