@@ -27,7 +27,7 @@ SECRET_KEY = 'f-_a^qdh-y610q9s87m#m+@8)&ie48%kz_(y=es(fdg1z@aurd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['kotak-dashboard.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['kotak-dashboard.herokuapp.com','127.0.0.1','bankingdashboard-server.herokuapp.com']
 
 
 # Application definition
