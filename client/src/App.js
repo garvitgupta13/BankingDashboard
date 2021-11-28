@@ -4,6 +4,8 @@ import MainPage from "./components/loansAndInvestment/MainPage.js";
 import ResponsiveDrawer from "./components/ResponsiveDrawer.js";
 import AllGoals from "./components/goals/AllGoals.js";
 import { TranactionHistroy } from "./components/transactionHistroy/TransactionHistroy.jsx";
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme as ct,ThemeProvider as tp} from '@mui/material/styles';
 import BillReminders from "./components/billReminder/BillReminders";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -12,6 +14,51 @@ import {useStyles} from './AppStyles';
 import "./App.css";
 
 const FIREBASE_URL = "https://banking-dashboard-default-rtdb.firebaseio.com/";
+
+
+const breakpointValues = {
+    xs: 0,
+    sm: 660,
+    md: 960,
+    lg: 1280,
+    xl: 1920,
+};
+
+
+const theme = createTheme({
+    typograhy: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+    },
+    palette: {
+        primary: {
+            light: '#007fff',
+            main: '#007fff',
+            dark: '#007fff',
+            contrastText: '#fff',
+        },
+        secondary: {
+            light: '#EA7D19',
+            main: '#EA5719',
+            dark: '#EA5719',
+            contrastText: '#000',
+        },
+    },
+    breakpoints: {
+        values: breakpointValues,
+    },
+});
+
+const theme2 = ct({
+    palette: {
+      primary: {
+        light: '#007fff',
+        main: '#007fff',
+        dark: '#007fff',
+        contrastText: '#fff',
+      },
+    },
+  });
+
 
 function App() {
 
@@ -33,6 +80,7 @@ function App() {
     const classes = useStyles();
     return (
         <>
+           <ThemeProvider theme={theme}>
             <ResponsiveDrawer />
             <div className="main-div">
                 <Grid container>
@@ -50,7 +98,9 @@ function App() {
                         <AccountInfo/>
                     </Grid>
                     <Grid item lg = {12} md = {12} sm = {12} xs = {12}>
-                        <TranactionHistroy/>
+                        <tp theme = {theme2}>
+                           <TranactionHistroy/>
+                        </tp>
                     </Grid>
                 </Grid>
                 <Grid container>
@@ -62,6 +112,7 @@ function App() {
                     </Grid>
                 </Grid>
             </div>
+            </ThemeProvider>
         </>
     );
 }
