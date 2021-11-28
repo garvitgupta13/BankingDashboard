@@ -248,7 +248,7 @@ export function TranactionHistroy({ width = null, height = null }) {
                                             style={{
                                                 minWidth: column.minWidth,
                                                 color: "white",
-                                                backgroundColor: "#3f51b5",
+                                                backgroundColor: "#007fff",
                                                 cursor: "pointer"
                                             }}
                                         >

@@ -67,7 +67,7 @@ const LoanForm = () => {
          <TextField
             autoFocus
             margin="dense"
-            label="Income"
+            label="Income (per anum)"
             type="number"
             value = {income}
             onChange = {((event) => setIncome(event.target.value))}

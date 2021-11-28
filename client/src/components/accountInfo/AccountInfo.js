@@ -7,7 +7,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { Grid } from '@material-ui/core';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
-import LoanForm from '../loanPredictor/LoanForm';
+import LoanForm from '../loanPredictor/loanForm';
 import {investments} from '../../services/getInvestments';
 
 
