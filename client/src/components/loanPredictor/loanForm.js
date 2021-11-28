@@ -28,7 +28,7 @@ const LoanForm = () => {
          return;
       }
 
-      const url = "http://localhost:8000/scoreJson";
+      const url = "https://bankingdashboard-server.herokuapp.com/scoreJson";
       
       const bodyData = JSON.stringify({
         "Income":income,
