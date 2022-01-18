@@ -6,7 +6,7 @@ import './Chart.css';
 
 const Chart = () => {
 
-    const [year,setYear] = useState("2021");
+    const [year,setYear] = useState("2022");
     const [allTransactions,setAllTransactions] = useState([]);
     
     const getAllTransaction = () =>{
