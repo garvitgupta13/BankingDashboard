@@ -91,7 +91,7 @@ const LoanForm = () => {
             onChange = {((event) => setMonth(event.target.value))}
             fullWidth
           />
-          <Button onClick={predictHandler} color="primary" variant="contained">
+          <Button style={{marginLeft:"35%"}} onClick={predictHandler} color="primary" variant="contained">
              Predict
           </Button>
           {toast && <Snackbar
