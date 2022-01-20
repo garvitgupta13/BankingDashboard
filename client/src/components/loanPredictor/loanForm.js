@@ -41,7 +41,7 @@ const LoanForm = () => {
       fetch(url,reqOpt)
       .then((response)=> response.json())
       .then((respJ)=> {
-        if(respJ.output === 1)
+        if(respJ.output === 0)
         {
           setToast(true);
           setToastMessage("Congrats!! You can get loan"); 
@@ -62,8 +62,8 @@ const LoanForm = () => {
 
     }
     return (
-     <div style={{margin:'10px',}}>
-         <h2>Loan Predictor!!!</h2>
+     <div style={{margin:'10px',marginTop:'40px'}}>
+         <h2 style={{textAlign:'center'}}>Loan Predictor</h2>
          <TextField
             autoFocus
             margin="dense"
@@ -76,7 +76,7 @@ const LoanForm = () => {
             <TextField
             autoFocus
             margin="dense"
-            label="Amount"
+            label="Loan Amount"
             type="number"
             value = {amount}
             onChange = {((event) => setAmount(event.target.value))}
@@ -85,7 +85,7 @@ const LoanForm = () => {
           <TextField
             autoFocus
             margin="dense"
-            label="Months"
+            label="Loan Tenure (in months)"
             type="number"
             value = {month}
             onChange = {((event) => setMonth(event.target.value))}

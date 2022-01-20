@@ -3,10 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 400,
-      height: 450,
+      height: 485,
       flexGrow: 1,
-      marginLeft: 30,
+      marginLeft: 10,
+      marginTop:-50,
+      marginBottom: 25,
       position: 'relative',
+      ["@media (max-width:960px)"]: {
+         marginTop: 55,
+        height: 500,
+      }
     },
     modal: {
       display: 'flex',
@@ -19,8 +25,12 @@ export const useStyles = makeStyles((theme) => ({
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
-    button: {
-      marginTop:0,
-      ["@media (max-width:960px)"]: { marginTop: 50 }
-    }
+    // button:{
+    //   marginLeft:13,
+    // },
   }));
+
+  /*    button: {
+    marginTop:45,
+    ["@media (max-width:960px)"]: { marginTop: 55 }
+  }*/

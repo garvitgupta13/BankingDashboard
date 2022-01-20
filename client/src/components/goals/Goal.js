@@ -40,32 +40,34 @@ const Goal = (props) => {
           <div className="goal-div">
              <h1>{props.title}</h1>
           </div>
-          <CircularProgress className="goal-circle" variant="determinate" value={value} size={130}/>
-          <Box
-            top={0}
-            left={0}
-            bottom={0}
-            right={0}
-            position="absolute"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Typography className="goal-value" variant="h5" component="div" color="textSecondary">{`${Math.round(
-              value,
-            )}%`}</Typography>
-            <div className = "show-figures">
-                 <AlterGoal 
-                 title = {props.title}
-                 id = {props.id}
-                 id_tmp = {props.id_tmp}
-                 total = {total}
-                 onChangeTotal = {totalChangeHandler}
-                 onChangeGoal = {goalChangeHandler} 
-                 onSubmitChangeGoal = {submitGoalHandler}
-                 collected = {collected}/>
-            </div>
-          </Box>
+          <div style={{marginLeft:'0'}}>
+            <CircularProgress className="goal-circle" variant="determinate" value={value} size={130}/>
+            <Box
+              top={0}
+              left={0}
+              bottom={0}
+              right={0}
+              position="absolute"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Typography className="goal-value" variant="h5" component="div" color="textSecondary">{`${Math.round(
+                value,
+              )}%`}</Typography>
+              <div className = "show-figures">
+                  <AlterGoal 
+                    title = {props.title}
+                    id = {props.id}
+                    id_tmp = {props.id_tmp}
+                    total = {total}
+                    onChangeTotal = {totalChangeHandler}
+                    onChangeGoal = {goalChangeHandler} 
+                    onSubmitChangeGoal = {submitGoalHandler}
+                    collected = {collected}/>
+              </div>
+            </Box>
+          </div>
       </Box>
     )
 

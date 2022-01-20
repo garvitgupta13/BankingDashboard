@@ -7,7 +7,6 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { Grid } from '@material-ui/core';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
-import LoanForm from '../loanPredictor/loanForm';
 import {investments} from '../../services/getInvestments';
 
 
@@ -61,9 +60,6 @@ const AccountInfo = () => {
                 ))}
               </List>
           </Grid> 
-          <Grid item lg = {12} md = {6}>
-            <LoanForm/>
-          </Grid>
         </Grid>
    )
     

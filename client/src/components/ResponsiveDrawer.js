@@ -19,6 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import AccountInfo from "./accountInfo/AccountInfo.js";
 
 const drawerWidth = 240;
 
@@ -53,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  accounts: {
+    marginTop:100,
+  },
 }));
 
 function ResponsiveDrawer(props) {
@@ -70,7 +74,7 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-          <ListItem selected={true} button key="Home">
+          <ListItem selected={ true } button key="Home">
             <ListItemIcon><HomeIcon/></ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
@@ -86,6 +90,11 @@ function ResponsiveDrawer(props) {
             <ListItemIcon><ExitToAppIcon/></ListItemIcon>
             <ListItemText primary="Log Out" />
           </ListItem>
+          <div className={classes.accounts}>
+            <ListItem>
+              <AccountInfo/>
+            </ListItem>
+          </div>
       </List>
     </div>
   );

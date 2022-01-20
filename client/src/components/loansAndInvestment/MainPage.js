@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import './MainPage.css';
 import Loan from './Loan';
+import LoanForm from '../loanPredictor/loanForm';
 import {loans} from '../../services/getLoans';
 
 const InvestmentLoan = () => {
@@ -30,8 +31,9 @@ const InvestmentLoan = () => {
 
     return (
         <div className = "loans-div">
-            <h2>LOANS TAKEN</h2>
+            <h2 style={{textAlign:'center'}}>Loans Due</h2>
             <Loan data = {allLoans}/>
+            <LoanForm/>
         </div>
     )
 

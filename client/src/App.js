@@ -84,26 +84,21 @@ function App() {
             <ResponsiveDrawer />
             <div className="main-div">
                 <Grid container>
-                    <Grid item lg = {9} md = {12} sm = {12} xs = {12}> 
-                        <Grid container>
-                            <Grid item lg = {6} md = {6} sm={12}  xs = {12}>
-                                <Chart />
-                            </Grid>
-                            <Grid item lg = {6} md = {6} sm={12} xs = {12}>
-                                <AllGoals />
-                            </Grid>
-                        </Grid>
+                    <Grid item lg = {8} md = {7} sm={12}  xs = {12}>
+                        <Chart />
                     </Grid>
-                    <Grid item lg = {3} md = {12} sm = {12} xs = {12}>
-                        <AccountInfo/>
+                    <Grid item lg = {4} md = {4} sm={12} xs = {12}>
+                        <AllGoals />
                     </Grid>
+                </Grid>
+                <Grid container>
                     <Grid item lg = {12} md = {12} sm = {12} xs = {12}>
                         <tp theme = {theme2}>
                            <TranactionHistroy/>
                         </tp>
                     </Grid>
                 </Grid>
-                <Grid container>
+                <Grid spacing={2} container>
                     <Grid item lg = {6}  md = {12} xs = {12}>
                        <MainPage />
                     </Grid>

@@ -34,3 +34,31 @@ bill-reminders {
     margin-bottom: 15px;
     height: auto;
 }
+
+.reminderHeaderDiv{
+    display: flex;
+    align-items: center;
+    align-content: space-between;
+}
+
+.tag{
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    height: fit-content;
+    background-color: rgba(3, 102, 214, 0.3);
+    color: black;
+    font-style: bold;
+    font-size: 14px;
+    border-radius: 7px;
+}
+
+.paid{
+    background-color: green;
+    color: #fff;
+}
+
+.late{
+    background-color: red;
+    color: #fff;
+}

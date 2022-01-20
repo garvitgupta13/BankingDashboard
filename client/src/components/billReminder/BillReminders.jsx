@@ -5,6 +5,15 @@ import ConfirmationModal from "./ConformationModal";
 import AddReminderModal from "./AddReminder";
 import styles from "./BillReminders.module.scss";
 import { getBillReminders, updateBillReminder } from './../../services/BillReminder';
+
+const Tag = ({message}) => {
+    return (
+        <div className={`${styles.tag} ${message==="paid" ? styles.paid : (message==="late" ? styles.late : styles.pending)}`}>
+        {message}
+        </div>
+    );
+}
+
 //create a bill reminder component
 export default function BillReminders() {
     const [billReminders, setBillReminders] = useState([]);
@@ -49,22 +58,22 @@ export default function BillReminders() {
 
     return (
         <div>
-            <h2>Bill Reminders</h2>
+            <h2 style={{textAlign:'center'}}>Bill Reminders</h2>
             <div className="bill-reminders">
                 {billReminders.map((billReminder, index) => {
                     const dueDate = moment(billReminder.startDate, "DD-MM-YYYY").add(billReminder.counter + 1, billReminder.frequency);
                     const daysLeft = dueDate.diff(moment(), "days");
                     return (
                         <div
-                            className={`${styles.billReminder} ${billReminder.paid ? styles.success : (daysLeft <= 3 ? styles.alert : null)}`}
+                            className={`${styles.billReminder} ${billReminder.paid ? styles.success : (daysLeft <= 0 ? styles.alert : null)}`}
                             key={index}
                             onClick={() => {
                                 setSelectedBillReminder(billReminder);
                                 setConfirmationModalVisibility(true);
                             }}
                         >
-                            <div className="bill-reminder-name">
-                                <h4> {billReminder.name}</h4>
+                            <div className={styles.reminderHeaderDiv}>
+                                <h4> {billReminder.name}</h4> <Tag message={billReminder.paid ? "paid" : (daysLeft <= 0 ? "late" : "pending")} />
                             </div>
                             <div className="bill-reminder-amount">
                                 {billReminder.amount ??
@@ -85,8 +94,8 @@ export default function BillReminders() {
                     );
                 })}
             </div>
-            <Button onClick={() => setAddReminderModalVisibility(true)}>
-                Add
+            <Button onClick={() => setAddReminderModalVisibility(true)} style={{marginLeft:"35%"}} color="primary" variant="contained">
+                Add Reminder
             </Button>
             {addReminderModalVisibility && (
                 <AddReminderModal

@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Button from "@mui/material/Button";
 import { getTransaction } from "../../services/Transaction";
-//import styles from "./TransactionHistroy.module.scss";
+import styles from "./TransactionHistroy.module.scss";
 
 const columns = [
     {
@@ -155,7 +155,7 @@ export function TranactionHistroy({ width = null, height = null }) {
 
     return (
         <>
-            <div>
+            <div className={styles.filtersDiv}>
                 <TextField
                     label="Amount less than"
                     type="number"

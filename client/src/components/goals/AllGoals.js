@@ -88,20 +88,23 @@ export default function AllGoals (){
     return (
        
         <div className={classes.root}>
-            <div className={classes.button} onClick={handleOpen}>
-              <AddGoal onAddGoal = {(newGoal) => setAllGoals([...allGoals, newGoal]) }/>
-            </div>
-          <Grid item >
-             <Goal
-                key = {allGoals[activeStep][1].id}
-                id  = {allGoals[activeStep][0]}
-                id_tmp = {allGoals[activeStep][1].id}
-                title = {allGoals[activeStep][1].title}
-                total = {parseInt(allGoals[activeStep][1].total)}
-                collected = {parseInt(allGoals[activeStep][1].collected)}
-                onChangeGoal = {goalChangeHandler}
-                />
-           </Grid>
+          <h1 style={{textAlign:'center'}}>My Goals</h1>
+          <div className={classes.goal}>
+            <Grid item >
+              <Goal
+                  key = {allGoals[activeStep][1].id}
+                  id  = {allGoals[activeStep][0]}
+                  id_tmp = {allGoals[activeStep][1].id}
+                  title = {allGoals[activeStep][1].title}
+                  total = {parseInt(allGoals[activeStep][1].total)}
+                  collected = {parseInt(allGoals[activeStep][1].collected)}
+                  onChangeGoal = {goalChangeHandler}
+                  />
+                <div className={classes.button} onClick={handleOpen}>
+                  <AddGoal onAddGoal = {(newGoal) => setAllGoals([...allGoals, newGoal]) }/>
+                </div>
+            </Grid>
+          </div>
           <MobileStepper
             steps={maxSteps}
             position="static"

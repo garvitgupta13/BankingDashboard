@@ -68,8 +68,7 @@ const AddGoal = (props) => {
 
   return (
     <div>
-
-      <AddBoxIcon color="primary"   onClick={handleClickOpen}/>
+      <Button color="primary" variant="contained" style={{marginLeft:'38%'}}  onClick={handleClickOpen}>Add Goal</Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">ADD GOAL</DialogTitle>
         <DialogContent>
