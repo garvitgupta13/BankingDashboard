@@ -26,5 +26,5 @@ npm start
 * Run the server `python manage.py runserver`
 
 ## Deployed Links:
-- [Frontend Link](https://bankingdashboard.herokuapp.com/)
+- [Frontend Link](http://banking-dashboard.herokuapp.com/)
 - [Backend Link](https://bankingdashboard-server.herokuapp.com/)
