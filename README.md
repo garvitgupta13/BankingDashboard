@@ -3,14 +3,16 @@ One page interactive baking user dashboard
 
 ## Steps to run:
 - Fork the repo
+
 ### Run frontend
 ```
+cd client
 npm install
 npm start
 ```
 
 ### Setting up environment for server
-
+* Move to server directory `cd server`
 * Create a virtual environment  
   * on **Ubuntu**: `python3 -m venv env`  
   * on **Windows PowerShell**: `python -m venv env`
