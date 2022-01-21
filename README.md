@@ -22,7 +22,7 @@ npm start
 
 ### Running server
 
-* Change directory to **server** `cd server
+* Change directory to **server** `cd server`
 * Run the server `python manage.py runserver`
 
 ## Deployed Links:
